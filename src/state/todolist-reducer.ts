@@ -133,8 +133,8 @@ export const addTodolistTC = (title: string): AppThunk => {
     }
 }
 
-export const changeTodolistTitleTC = (id: string, title: string): any => {
-    return (dispatch: Dispatch) => {
+export const changeTodolistTitleTC = (id: string, title: string): AppThunk => {
+    return (dispatch) => {
         todolistsApi.updateTodolists(id, title)
             .then((res) => {
                 dispatch(changeTodolistTitleAC(id, title))

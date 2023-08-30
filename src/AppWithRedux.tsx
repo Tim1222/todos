@@ -2,7 +2,7 @@ import React, {useCallback, useEffect} from 'react';
 import './App.css';
 import {Todolist} from "./Todolist";
 import {AddItemForm} from "./AddItemForm";
-import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
+import {AppBar, Button, Container, Grid, IconButton, LinearProgress, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import {
     addTodolistTC,
@@ -17,6 +17,7 @@ import {addTaskTC, removeTaskTC, updateTaskStatusTC} from "./state/tasks-reducer
 import {useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from "./state/store";
 import {TaskStatuses, TaskType} from "./api/todolists-api";
+import CustomizedSnackbars from "./components/ErrorSnackbar/ErrorSnackbar";
 
 
 export type TasksStateType = {
@@ -93,7 +94,8 @@ function AppWithRedux() {
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
-
+                <CustomizedSnackbars/>
+                <LinearProgress />
             </AppBar>
             <Container fixed>
                 <Grid container style={{padding: '10px 5px 20px'}}>
