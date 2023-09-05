@@ -18,6 +18,7 @@ import {useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from "./state/store";
 import {TaskStatuses, TaskType} from "./api/todolists-api";
 import CustomizedSnackbars from "./components/ErrorSnackbar/ErrorSnackbar";
+import {RequestStatusType} from "./app/app-reducer";
 
 
 export type TasksStateType = {
@@ -25,7 +26,7 @@ export type TasksStateType = {
 }
 
 function AppWithRedux() {
-
+    const status = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
 
     const dispatch = useAppDispatch()
     const todoList = useSelector<AppRootStateType, Array<TodolistDomainType>>((state => state.todolist))
@@ -33,6 +34,7 @@ function AppWithRedux() {
 
     // console.log( todolistsApi.getTodolists())
     useEffect(() => {
+        console.log('akakakak')
         dispatch(fetchTodolistsTC())
     }, [])
 
@@ -76,7 +78,7 @@ function AppWithRedux() {
 
     return (
         <div className="App">
-
+            <CustomizedSnackbars/>
             <AppBar position="static">
 
                 <Toolbar>
@@ -94,9 +96,11 @@ function AppWithRedux() {
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
-                <CustomizedSnackbars/>
-                <LinearProgress />
+
+
             </AppBar>
+            {status === 'loading' && <LinearProgress/>}
+
             <Container fixed>
                 <Grid container style={{padding: '10px 5px 20px'}}>
                     <AddItemForm addItem={addTodolists}/>
@@ -110,15 +114,13 @@ function AppWithRedux() {
                             return <Grid item>
                                 <Paper style={{padding: '15px'}}>
                                     <Todolist
+                                        todolist={tl}
                                         key={tl.id}
-                                        id={tl.id}
-                                        title={tl.title}
                                         tasks={tasksForTodolist}
                                         removeTask={removeTask}
                                         changeFilter={changeFilter}
                                         addTask={addTask}
                                         changeTaskStatus={changeStatus}
-                                        filter={tl.filter}
                                         removeTodoList={removeTodoList}
                                         changeTaskTitle={changeTaskTitle}
                                         changeTodolistTitle={changeTodolistTitle}

@@ -3,11 +3,10 @@ import './App.css';
 import {Todolist} from "./Todolist";
 import {v1} from 'uuid';
 import {AddItemForm} from "./AddItemForm";
-import {AppBar, Button, Container, Grid, IconButton, LinearProgress, Paper, Toolbar, Typography} from "@mui/material";
+import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import {TaskPriotities, TaskStatuses, TaskType} from "./api/todolists-api";
 import {FilterValuesType, TodolistDomainType} from "./state/todolist-reducer";
-import CustomizedSnackbars from "./components/ErrorSnackbar/ErrorSnackbar";
 
 
 // export type TodolistType = {
@@ -25,8 +24,8 @@ function App() {
     let todolistID2 = v1()
 
     let [todoList, setTodoList] = useState<Array<TodolistDomainType>>([
-        {id: todolistID1, title: 'What to learn', filter: 'all', addedDate: '', order: 0},
-        {id: todolistID2, title: 'What to buy', filter: 'all', addedDate: '', order: 0}
+        {id: todolistID1, title: 'What to learn', filter: 'all', addedDate: '', order: 0, entityStatus:'idle'},
+        {id: todolistID2, title: 'What to buy', filter: 'all', addedDate: '', order: 0, entityStatus:'idle'}
     ])
 
     let [tasksObj, setTasks] = useState<TasksStateType>({
@@ -161,7 +160,8 @@ function App() {
             title: title,
             filter: 'all',
             addedDate: '',
-            order: 0
+            order: 0,
+            entityStatus:'idle'
         }
         setTodoList([todoListNew, ...todoList])
         setTasks({...tasksObj, [todoListNew.id]: []})
@@ -206,15 +206,13 @@ function App() {
                             return <Grid item>
                                 <Paper style={{padding: '15px'}}>
                                     <Todolist
+                                        todolist={tl}
                                         key={tl.id}
-                                        id={tl.id}
-                                        title={tl.title}
                                         tasks={tasksForTodoList}
                                         removeTask={removeTask}
                                         changeFilter={changeFilter}
                                         addTask={addTask}
                                         changeTaskStatus={changeStatus}
-                                        filter={tl.filter}
                                         removeTodoList={removeTodoList}
                                         changeTaskTitle={changeTaskTitle}
                                         changeTodolistTitle={changeTodolistTitle}

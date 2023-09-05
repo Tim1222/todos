@@ -12,8 +12,8 @@ beforeEach(() => {
     let todolistID2 = v1()
 
     const startState: Array<TodolistDomainType> = [
-        {id: todolistID1, title: 'What to learn', filter: 'all', order: 0, addedDate: ''},
-        {id: todolistID2, title: 'What to buy', filter: 'all', order: 0, addedDate: ''}
+        {id: todolistID1, title: 'What to learn', filter: 'all', order: 0, addedDate: '', entityStatus:'idle'},
+        {id: todolistID2, title: 'What to buy', filter: 'all', order: 0, addedDate: '', entityStatus:'idle'}
     ]
 })
 
@@ -22,8 +22,8 @@ test('correct todolist should be removed', () => {
     let todolistID2 = v1()
 
     const startState: Array<TodolistDomainType> = [
-        {id: todolistID1, title: 'What to learn', filter: 'all', order: 0, addedDate: ''},
-        {id: todolistID2, title: 'What to buy', filter: 'all', order: 0, addedDate: ''}
+        {id: todolistID1, title: 'What to learn', filter: 'all', order: 0, addedDate: '', entityStatus:'idle'},
+        {id: todolistID2, title: 'What to buy', filter: 'all', order: 0, addedDate: '', entityStatus:'idle'}
     ]
 
     const endState = todolistReducer(startState, removeTodolistAC(todolistID1))
@@ -57,8 +57,8 @@ test('correct todolist should change its name', () => {
     let newTodolistTitle = 'New Todolist'
 
     const startState: Array<TodolistDomainType> = [
-        {id: todolistID1, title: 'What to learn', filter: 'all', order: 0, addedDate: ''},
-        {id: todolistID2, title: 'What to buy', filter: 'all', order: 0, addedDate: ''}
+        {id: todolistID1, title: 'What to learn', filter: 'all', order: 0, addedDate: '', entityStatus:'idle'},
+        {id: todolistID2, title: 'What to buy', filter: 'all', order: 0, addedDate: '', entityStatus:'idle'}
     ]
     const action = changeTodolistTitleAC(todolistID2, newTodolistTitle)
     //     {
@@ -79,8 +79,8 @@ test('correct filter of todolist should be changed', () => {
     let newFilter: FilterValuesType = 'completed'
 
     const startState: Array<TodolistDomainType> = [
-        {id: todolistID1, title: 'What to learn', filter: 'all', order: 0, addedDate: ''},
-        {id: todolistID2, title: 'What to buy', filter: 'all', order: 0, addedDate: ''}
+        {id: todolistID1, title: 'What to learn', filter: 'all', order: 0, addedDate: '', entityStatus:'idle'},
+        {id: todolistID2, title: 'What to buy', filter: 'all', order: 0, addedDate: '', entityStatus:'idle'}
     ]
     const action = changeTodolistFilterAC(todolistID2, newFilter)
     //     ChangeTodolistFilterActionType  = {
@@ -98,8 +98,8 @@ test('todolist should be set to the state', () => {
     let todolistID2 = v1()
 
     const startState: Array<TodolistDomainType> = [
-        {id: todolistID1, title: 'What to learn', filter: 'all', order: 0, addedDate: ''},
-        {id: todolistID2, title: 'What to buy', filter: 'all', order: 0, addedDate: ''}
+        {id: todolistID1, title: 'What to learn', filter: 'all', order: 0, addedDate: '',entityStatus:'idle'},
+        {id: todolistID2, title: 'What to buy', filter: 'all', order: 0, addedDate: '', entityStatus:'idle'}
     ]
 
     const action = setTodolistsAC(startState)

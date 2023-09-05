@@ -30,7 +30,7 @@ export type TodolistType = {
 //     title: string[]
 //     data: {}
 // }
-type ResponseType<D = {}> = {
+export type ResponseType<D = {}> = {
     resultCode: number
     title: string[]
     data: D
@@ -63,6 +63,7 @@ export type TaskType = {
     todoListId: string
     order: number
     addedDate: string
+
 }
 type GetTasksResponse = {
     error: string | null
